@@ -8,13 +8,14 @@ export class Producto{
         if(codigo === undefined || typeof codigo !== "string" || codigo.length != 6) throw Error("Codigo Invalido");
         this._codigo = codigo;
 
+        
+        if(nombre === undefined || typeof nombre !== "string" || nombre.length > 100) throw Error("Nombre Invalido");
         this._nombre = nombre;
-        if(nombre === undefined || typeof nombre !== "string" || nombre.length  > 100) throw Error("Nombre Invalido");
 
-        if(precio === undefined || (Number(precio) === precio && precio % 1 !== 0) ) throw Error("Precio Invalido");
+        if(precio === undefined || Number(precio) === precio)  throw Error("Precio Invalido");
         this._precio = precio;
 
-        if(stock === undefined || (Number(n) === n && n % 1 === 0) ) throw Error("Stock invalido"); 
+        if(stock === undefined || !Number(stock) === stock || stock % 1 !== 0 ) throw Error("Stock invalido"); 
         this._stock = stock;
         
         if(ultimaFechaSurtida === undefined || !ultimaFechaSurtida instanceof Date) throw Error("Fecha Invalida");
@@ -49,7 +50,7 @@ export class Producto{
     get ultimaFechaSurtida(){ return this._ultimaFechaSurtida; }
     set ultimaFechaSurtida(ultimaFechaSurtida){
         if(ultimaFechaSurtida === undefined || !ultimaFechaSurtida instanceof Date) throw Error("Fecha Invalida");
-        this._ultimaFechaSurtida = ultimaFechaSurtida;
+        this._ultimaFechaSurtida = new Date(ultimaFechaSurtida);
     }
     
 
